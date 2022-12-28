@@ -3,13 +3,39 @@ import './App.css';
 // import your fontawesome library
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock, faEdit, faTrashAlt, faUser } from '@fortawesome/free-regular-svg-icons';
-import { faMoneyBill, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { faCarAlt, faHomeAlt, faMoneyBill, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 
+function Side(){
+  return(
+    <>
+      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                  <img src="https://i.imgur.com/cUAWawn.jpg" alt="Bootstrap" width="30" height="24"/>
+                </a>
+                <ul class="nav nav-pills mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li class="nav-item w-100 ">
+                        <a href="#" class="nav-link align-middle px-2 py-1">
+                        <FontAwesomeIcon icon={faHomeAlt} />  <span class="ms-1 d-none d-sm-inline">Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item w-100 p-2">
+                        <a href="#" class=" active nav-link align-middle px-2 p-1">
+                        <FontAwesomeIcon icon={faCarAlt} />  <span class="ms-1 d-none d-sm-inline">Cars</span>
+                        </a>
+                    </li>
+                </ul>
+                <hr/>
+            </div>
+        </div>
+    </>
+  )
+}
 
 function Nav(){
   return(
     <>
-    <nav class="navbar navbar-expand-lg bg-light">
+      <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <img src="https://i.imgur.com/cUAWawn.jpg" alt="Bootstrap" width="30" height="24"/>
@@ -27,10 +53,21 @@ function Nav(){
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
-            <div className='ps-3 pe-1'>
-              <img className='rounded-circle' src='https://via.placeholder.com/30/3C73A8/FFFFFF/?text=U'/>
-            </div>
-            <p className='my-auto '>Unis Badri</p>
+            <div class="dropdown ps-3 pe-1 my-auto">
+                    <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img className='rounded-circle' src='https://via.placeholder.com/30/3C73A8/FFFFFF/?text=U'/>
+                        <p className='my-auto '> Unis Badri </p>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                        <li><a class="dropdown-item" href="#">New project...</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider"/>
+                        </li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    </ul>
+                </div>
           </div>
         </div>
       </nav>
@@ -81,11 +118,11 @@ function Card({name, type, price, capacity, updated, image}){
               <img className=' img-fluid ' src={image}/>
             </div>
             <p class="card-text m-0">{name} / {type}</p>
-            <p class="card-text m-0 fw-bold"><FontAwesomeIcon icon={faMoneyBill} /> {price} / hari</p>
+            <p class="card-text m-0 fw-bold"> {price} / hari</p>
             <p class="card-text m-0"><FontAwesomeIcon icon={faUserFriends} /> {capacity} people</p>
             <p class="card-text m-0"><FontAwesomeIcon icon={faClock} /> Updated at {updated}</p>
             <div className='d-flex justify-content-between pt-5'>
-              <button className='btn btn-outline-danger'><FontAwesomeIcon icon={faTrashAlt} /> Delete</button> <button className='btn btn-success'><FontAwesomeIcon icon={faEdit} /> Edit</button>
+              <button className='btn btn-outline-danger btn-lg form-control me-2'><FontAwesomeIcon icon={faTrashAlt} /> Delete</button> <button className='btn btn-success btn-lg form-control'><FontAwesomeIcon icon={faEdit} /> Edit</button>
             </div>
           </div>
         </div>
@@ -96,24 +133,29 @@ function Card({name, type, price, capacity, updated, image}){
 export default function App() {
   return (
     <section>
-      <Nav/>
-      <div className="col-12 container pt-5 ps-3 pe-3 bg-muted">
-        <Cumbs/>
-        <Top/>
-        <div className='col-12'>
-          <Filter name="All" isActive={true}/>
-          <Filter name="2-4" isActive={false}/>
-          <Filter name="4-6" isActive={false}/>
-          <Filter name="6-8" isActive={false}/>
+      <div class="row flex-nowrap">
+        <Side/>
+        <div class="col">
+          <Nav/>
+          <div className="col-12 container pt-5 ps-3 pe-3 bg-muted">
+            <Cumbs/>
+            <Top/>
+            <div className='col-12'>
+              <Filter name="All" isActive={true}/>
+              <Filter name="2-4" isActive={false}/>
+              <Filter name="4-6" isActive={false}/>
+              <Filter name="6-8" isActive={false}/>
+            </div>
+            <div className='row col-12'>
+              <Card name={"Avanza"} type={"2017"} price={"Rp. 350.000"} capacity={"4-6"} updated={"4 November 2022, 18.00"} image={"https://i.imgur.com/diPgeKx.png"}/>
+              <Card name={"Avanza"} type={"2017"} price={"Rp. 350.000"} capacity={"4-6"} updated={"4 November 2022, 18.00"} image={"https://i.imgur.com/diPgeKx.png"}/>
+              <Card name={"Avanza"} type={"2017"} price={"Rp. 350.000"} capacity={"4-6"} updated={"4 November 2022, 18.00"} image={"https://i.imgur.com/diPgeKx.png"}/>
+              <Card name={"Avanza"} type={"2017"} price={"Rp. 350.000"} capacity={"4-6"} updated={"4 November 2022, 18.00"} image={"https://i.imgur.com/diPgeKx.png"}/>
+              <Card name={"Avanza"} type={"2017"} price={"Rp. 350.000"} capacity={"4-6"} updated={"4 November 2022, 18.00"} image={"https://i.imgur.com/diPgeKx.png"}/>
+            </div>
+            
+          </div>
         </div>
-        <div className='row col-12'>
-          <Card name={"Avanza"} type={"2017"} price={"Rp. 350.000"} capacity={"4-6"} updated={"4 November 2022, 18.00"} image={"https://i.imgur.com/0klTl56.jpg"}/>
-          <Card name={"Avanza"} type={"2017"} price={"Rp. 350.000"} capacity={"4-6"} updated={"4 November 2022, 18.00"} image={"https://i.imgur.com/0klTl56.jpg"}/>
-          <Card name={"Avanza"} type={"2017"} price={"Rp. 350.000"} capacity={"4-6"} updated={"4 November 2022, 18.00"} image={"https://i.imgur.com/0klTl56.jpg"}/>
-          <Card name={"Avanza"} type={"2017"} price={"Rp. 350.000"} capacity={"4-6"} updated={"4 November 2022, 18.00"} image={"https://i.imgur.com/0klTl56.jpg"}/>
-          <Card name={"Avanza"} type={"2017"} price={"Rp. 350.000"} capacity={"4-6"} updated={"4 November 2022, 18.00"} image={"https://i.imgur.com/0klTl56.jpg"}/>
-        </div>
-        
       </div>
     </section>
   );
